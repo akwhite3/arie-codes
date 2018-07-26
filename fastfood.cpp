@@ -15,6 +15,11 @@
 #include <errno.h> 
 #include <cstring>
 
+
+/** 
+This file uses semaphores to run a fast food restaurant. The input file is a txt file with the customer name, followed by the time they arrived after the previous person (in seconds), and the time it takes to service them. To run the program, from the command line, the program takes an integer as the number of servers that are available to help. Each waiter can only serve one person at a time. The program prints out the actions as they happen.
+*/
+
 using namespace std;
 mutex mtx;
 sem_t *clerks;
