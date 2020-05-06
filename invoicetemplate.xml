@@ -1,0 +1,385 @@
+<?xml version="1.0"?><!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+<head>
+	<link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}" src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}" src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+	<#if .locale == "zh_CN">
+		<link name="NotoSansCJKsc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKsc_Regular}" src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+	<#elseif .locale == "zh_TW">
+		<link name="NotoSansCJKtc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKtc_Regular}" src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+	<#elseif .locale == "ja_JP">
+		<link name="NotoSansCJKjp" type="font" subtype="opentype" src="${nsfont.NotoSansCJKjp_Regular}" src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+	<#elseif .locale == "ko_KR">
+		<link name="NotoSansCJKkr" type="font" subtype="opentype" src="${nsfont.NotoSansCJKkr_Regular}" src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+	<#elseif .locale == "th_TH">
+		<link name="NotoSansThai" type="font" subtype="opentype" src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
+	</#if>
+    <macrolist>
+        <macro id="nlheader">
+            <table class="header" width="100%"><tr>
+	<td width="33%"><#if companyInformation.logoUrl?length != 0><img src="${companyInformation.logoUrl}" style="width: 200px; height:50px;" /> </#if></td>
+	<td align="center" width="33%"><span align="center" style="font-size: 16pt;"><strong>${record@title}</strong></span><br /><#if record.custrecord_customer.custentity_is_special_billing == true>
+	<center><span style="color:red;"><strong>(SPECIAL BILLING)</strong></span></center>
+	</#if></td>
+	<td align="right" rowspan="2" width="33%">
+	<table class="linetb"><tr>
+		<td class="linetb-dark">${record@title}</td>
+		<td class="bordleft bordbot">${record.name}</td>
+		</tr>
+		<tr>
+		<td class="bordbot">Created By</td>
+		<td class="bordleft bordbot">${record.owner}</td>
+		</tr>
+		<tr>
+		<td class="bordbot">Date</td>
+		<td class="bordbot bordleft">${record.custrecord_sb_date}</td>
+		</tr></table>
+	</td>
+	</tr>
+	<tr>
+	<td colspan="2"><#if record.custrecord_sb_currency == "Canadian Dollar">
+	<table><tr>
+		<td style="font-size: 7pt;">UnifiedCommunications.com, Inc.<br />1285 West Broadway, #600<br />Vancouver, BC V6H 3X8</td>
+		<td style="font-size: 7pt;">Phone: ${companyInformation.phone}<br />Fax: ${companyInformation.fax}<br />Billing: (800) 641-6416</td>
+		<td style="font-size: 7pt;">Sales: Sales@unifiedcommunications.com<br />AR: AR@unifiedcommunications.com</td>
+		</tr></table>
+	<#else>
+
+	<table><tr>
+		<td style="font-size: 7pt;">Tele-Communication, Inc.<br />2075 East Governors Circle<br />Houston, TX 77092, USA</td>
+		<td style="font-size: 7pt;">Phone: ${companyInformation.phone}<br />Fax: ${companyInformation.fax}<br />Billing: (800) 641-6416 Ext. 120</td>
+		<td style="font-size: 7pt;">Sales: Sales@unifiedcommunications.com<br />AR: AR@unifiedcommunications.com</td>
+		</tr></table>
+	</#if></td>
+	</tr></table>
+        </macro>
+        <macro id="nlfooter">
+            <table class="footer" style="width: 100%;"><tr>
+	<td><barcode codetype="code128" showtext="true" value="${record.name}"/></td>
+	<td align="right"><pagenumber/> of <totalpages/></td>
+	</tr></table>
+        </macro>
+    </macrolist>
+    <style type="text/css">table {
+      <#if .locale == "zh_CN">
+          font-family: stsong, sans-serif;
+      <#elseif .locale == "zh_TW">
+          font-family: msung, sans-serif;
+      <#elseif .locale == "ja_JP">
+          font-family: heiseimin, sans-serif;
+      <#elseif .locale == "ko_KR">
+          font-family: hygothic, sans-serif;
+      <#elseif .locale == "ru_RU">
+          font-family: verdana;
+      <#else>
+          font-family: sans-serif;
+      </#if>
+          font-size: 9pt;
+          table-layout: fixed;
+      }
+
+    th {
+        font-weight: bold;
+        font-size: 8pt;
+        vertical-align: middle;
+        padding: 5px 6px 3px;
+        background-color: #e3e3e3;
+        color: #333333;
+    }
+    td {
+        padding: 4px 6px;
+    }
+
+    span.title {
+      font-size: 20pt;
+    }
+
+    span.number {
+      font-size: 16pt;
+    }
+
+    span.itemname {
+      font-weight: bold;
+      line-height: 150%;
+    }
+
+    hr {
+      width: 100%;
+      color: #d3d3d3;
+      background-color: #d3d3d3;
+      height: 1px;
+    }
+
+    totalrow { 
+      font-weight: bold;
+      font-size: 12pt;
+      vertical-align: middle;
+      padding: 5px 6px 3px;
+      background-color: #e3e3e3;
+      color: #333333; 
+    }
+
+    .bordright {
+      border-right: 1px solid #000;
+    }
+
+    .bordleft {
+      border-left: 1px solid #000;
+    }
+
+    .bordtop {
+      border-top: 1px solid #000;
+    }
+
+    .bordbot {
+      border-bottom: 1px solid #000;
+    }
+
+    .linetb {
+      border-top: 1px solid #000;
+      border-left: 1px solid #000;
+      border-right: 1px solid #000;
+    }
+
+    .linetb-dark {
+      background: #000;
+      color: #fff;
+    }
+
+    .cell-dark {
+      background: #000;
+      color: #fff;
+    }
+
+    .pfix p {
+      padding: 0;
+      margin: 0;
+    }
+
+    .align-left {
+      text-align: left !important;
+    }
+
+    .align-right {
+      text-align: right !important;
+    }
+
+    .align-center {
+      text-align: center !important;
+    }
+
+    .shipbill-container {
+      width: 100%;
+      border: 1px solid #000;
+    }
+
+    .shipbill-title1 {
+      background:#000;
+      color:#fff;
+      text-transform:uppercase;
+      width: 100%;
+      margin:0;
+      padding: 4px;
+    }
+
+    .shipbill-inner1 {
+      padding: 0 12px 12px 12px;
+    }
+
+    .pfix-align-center p {
+      align: center !important
+    }
+
+    .total-text {
+      font-size: 12pt;
+    }
+
+    .note {
+      font-size: 8pt;
+      text-align: left;
+    }
+</style>
+</head>
+<body header="nlheader" header-height="11%" footer="nlfooter" footer-height="20pt" padding="0.5in 0.5in 0.5in 0.5in" size="Letter">
+    <table style="width: 100%;"><tr>
+	<td class="pfix" style="padding: 0; margin: 0;" width="48%">
+	<div class="shipbill-title1"><strong>${record.custrecord_sb_billaddress@label}</strong></div>
+	</td>
+	<td width="4%">&nbsp;</td>
+	<td class="pfix" style="padding: 0; margin: 0;" width="48%">
+	<div class="shipbill-title1"><strong>${record.custrecord_sb_shipaddress@label}</strong></div>
+	</td>
+	</tr>
+	<tr>
+	<td class="bordright bordbot bordleft">
+	<div class="shipbill-inner1 pfix"><span>${record.custrecord_sb_billaddress}</span> <!--${record.billaddress?replace('/ Phone:$/gim ', ' ', 'rm')}--></div>
+	</td>
+	<td>&nbsp;</td>
+	<td class="bordright bordbot bordleft">
+	<div class="shipbill-inner1 pfix"><!--<#if record.custbody_shipto_attention?has_content><span>${record.custbody_shipto_attention@label}: ${record.custbody_shipto_attention}</span><br/></#if>--><span>${record.custrecord_sb_shipaddress}</span></div>
+	</td>
+	</tr></table>
+
+<table class="body" style="width: 100%; margin-top: 10px;"><tr>
+	<th>${record.custrecord_sb_terms@label}</th>
+	<th>${record.custrecord_sb_duedate@label}</th>
+	<th>${record.custrecord_sb_otherrefnum@label}</th>
+	<th>${record.custrecord_sb_salesrep@label}</th>
+	<th>${record.custrecord_sb_shipmethod@label}</th>
+	</tr>
+	<tr>
+	<td>${record.custrecord_sb_terms}</td>
+	<td>${record.custrecord_sb_duedate}</td>
+	<td>${record.custrecord_sb_otherrefnum}</td>
+	<td>${record.custrecord_sb_salesrep}</td>
+	<td>${record.custrecord_sb_shipmethod}</td>
+	</tr></table>
+
+<table style="width: 100%; margin-top: 10px;"><tr>
+	<td><#if record.custrecord_summarybill_project?has_content><b>Project:</b> ${record.custrecord_summarybill_project}</#if></td>
+	</tr>
+	<#if record.custrecord_sb_linkedtracking?has_content>
+	<tr>
+	<td><b>Tracking Numbers:</b></td>
+	</tr>
+	
+	<tr>
+	<td>${record.custrecord_sb_linkedtracking}</td>
+	</tr>
+	</#if>
+	<#if record.custrecord_sb_memo?has_content>
+	<tr>
+	<td><b>Memo:</b> ${record.custrecord_sb_memo}</td>
+	</tr>
+	</#if></table>
+<!-- start items --><!-- invoice lines--><#if record.custrecord_sb_lineinfo?has_content><#assign colNum = 0>
+
+<#if record.custrecord_sb_credits != 0>
+<h4><span style="font-size:14px;"><span style="font-family:Arial,Helvetica,sans-serif;"><b>Invoiced Items: </b></span></span></h4>
+</#if>
+<table class="itemtable" style="width: 100%; margin-top: 10px;"><#assign cbLINES = record.custrecord_sb_lineinfo?split('|')><#if colNum == 0>
+<thead>
+	<tr>
+	<th class="cell-dark" width="22%">Item</th>
+	<th class="cell-dark" width="30%">Description</th>
+	<th class="cell-dark pfix-align-center" width="10%">Shipped</th>
+	<th align="center" class="cell-dark pfix-align-center" colspan="2" width="10%">Ordered</th>
+	<th align="center" class="cell-dark pfix-align-center" colspan="2" width="12%">Remaining</th>
+	<th align="right" class="cell-dark" colspan="2" width="12%">Unit Price</th>
+	<th align="right" class="cell-dark" width="12%">Total</th>
+	</tr>
+</thead>
+</#if><#list cbLINES as line><tr><#list line?split('*') as column><#if column?index == 0>
+	<td class="bordbot invoiceitem1" valign="middle"><span class="itemname">${column?trim}</span></td>
+	<#elseif column?index == 1>
+	<td align="left" class="bordbot invoiceitem1" valign="middle">${column?trim}</td>
+	<#elseif column?index == 2>
+	<td align="center" class="bordbot" valign="middle">${column?trim}</td>
+	<#elseif column?index == 3>
+	<td align="center" class="bordbot" colspan="2" valign="middle">${column?trim}</td>
+	<#elseif column?index == 4>
+	<td align="center" class="bordbot" colspan="2" valign="middle">${column?trim}</td>
+	<#elseif column?index == 5>
+	<td align="right" class="bordbot" colspan="2" valign="middle">${column?trim}</td>
+	<#else>
+	<td align="right" class="bordbot" valign="middle">${column?trim}</td>
+	</#if></#list></tr>
+	</#list></table>
+</#if><!-- credit memo lines --><#if record.custrecord_creditmemo_lines?has_content><#assign memoCol = 0>
+
+<h4><span style="font-size:14px;"><span style="font-family:Arial,Helvetica,sans-serif;"><b>Credits: </b></span></span></h4>
+
+<table class="memotable" style="width: 100%; margin-top: 10px;"><#assign memoLines = record.custrecord_creditmemo_lines?split('|')><#if memoCol == 0>
+<thead>
+	<tr>
+	<th class="cell-dark pfix-align-center" width="10%">Quantity</th>
+	<th align="center" class="cell-dark pfix-align-center" style="width: 455px;" width="51%">Item</th>
+	<th align="center" class="cell-dark pfix-align-center" style="width: 69px;">Source</th>
+	<th align="right" class="cell-dark" style="width: 68px;" width="12%">Rate</th>
+	<th align="right" class="cell-dark" style="width: 74px;" width="12%">Amount</th>
+	</tr>
+</thead>
+</#if><#list memoLines as mline><tr><#list mline?split('*') as mcolumn><#if mcolumn?index == 0>
+	<td align="center" class="bordbot invoiceitem1" valign="middle"><span class="itemname">${mcolumn?trim}</span></td>
+	<#elseif mcolumn?index == 1>
+	<td align="left" class="bordbot invoiceitem1" style="width: 455px;" valign="middle"><b>${mcolumn?trim}</b><br /><#elseif mcolumn?index == 2> ${mcolumn?trim}</td>
+	<#elseif mcolumn?index == 3>
+	<td class="bordbot invoiceitem1" horizontal-align="middle" style="text-align: justify; width: 69px;" valign="middle">
+	<p style="text-align: center;">Invoice<br />#${mcolumn?trim}</p>
+	</td>
+	<#elseif mcolumn?index == 4>
+	<td align="right" class="bordbot" style="width: 68px;" valign="middle">(${mcolumn?trim})</td>
+	<#else>
+	<td align="right" class="bordbot" style="width: 74px;" valign="middle">(${mcolumn?trim})</td>
+	</#if></#list></tr>
+	</#list></table>
+</#if><!-- end of items --><#if record.custrecord_sb_taxrate?has_content><#assign iNum = 0>
+
+<table class="total" style="width: 100%; margin-top: 10px;"><tr><#assign taxLINES = record.custrecord_sb_taxrate?split('|')><#assign credittaxLINES = record.custrecord_sb_credit_tax?split('|')><#if iNum == 0>
+	<td width="60%">
+	<p class="note" style="padding-top: 24px;">RETURN/EXCHANGE POLICY: Headset products including Plantronics &amp; Jabra generally have a 30-day return/exchange policy except for special-build items. For other products and services, we base our return rules on our manufacturers&#39; and distributors&#39; policies that often involve restocking fees and sometimes attempt to prohibit returns altogether; in such cases we negotiate on our customers&rsquo; behalf for exceptions, but we cannot guarantee that returns will be possible when manufacturers and distributors refuse to accept them. Please request return policies or Return Authorizations from your account manager before returning products. If the return is an authorized exchange due to product failure that occurred within 14 days of customer&#39;s receipt of the product, we will pay return and replacement ground shipping for US orders only. Shipping returns is the customer&rsquo;s responsibility unless otherwise agreed. See our latest return/exchange policy:<br />http://www.unifiedcommunications.com/t-returns.aspx</p>
+	</td>
+	<td align="right" width="40%">
+	<table style="margin: 0 5px 0 15px;" width="100%"><tr>
+		<td align="left" width="50%"><b>${record.custrecord_sb_subtotal@label}</b></td>
+		<td align="right" width="50%">${record.custrecord_sb_subtotal}</td>
+		</tr>
+		<tr>
+		<td><b>${record.custrecord_sb_shipcost@label} <sup>1</sup></b></td>
+		<td align="right"><!--${record.shippingcost}--><#assign shipcalc=(record.custrecord_sb_shipcost - record.custrecord_sb_handlecost)>${shipcalc?string.currency}</td>
+		</tr>
+		<tr><#if record.custrecord_sb_handlecost != 0>
+		<td><b>${record.custrecord_sb_handlecost@label}</b></td>
+		<td align="right">${record.custrecord_sb_handlecost}</td>
+		</#if></tr>
+		</#if><!-- Break up the tax by percentage here --></#if><#list taxLINES as aline>
+		<tr><#list aline?split(',') as acolumn><#if acolumn?index == 0>
+		<td align="left"><b>${record.custrecord_sb_taxtotal@label} (${acolumn?trim}%) <sup>2</sup></b></td>
+		<#else>
+		<td align="right">${acolumn?trim}</td>
+		</#if></#list></tr>
+		</#list><#if record.custrecord_sb_credits != 0>
+		<tr>
+		<td align="left" width="50%"><b>${record.custrecord_sb_credits@label}</b></td>
+		<td align="right" width="50%">(${record.custrecord_sb_credits})</td>
+		</tr>
+		</#if><!--Credited Taxes--><#list credittaxLINES as tline><#if tline?has_content>
+		<tr><#list tline?split(',') as tcolumn><#if tcolumn?index == 0>
+		<td align="left"><b>Tax (${tcolumn?trim}%) <sup>2</sup></b></td>
+		<#else>
+		<td align="right">(${tcolumn?trim})</td>
+		</#if></#list></tr>
+		</#if></#list>
+		<tr>
+		<td align="left"><b>${record.custrecord_total@label}</b></td>
+		<td align="right">${record.custrecord_total}</td>
+		</tr>
+		<#if record.custrecord_sb_totalpaid != 0>
+		<tr>
+		<td align="left"><b>${record.custrecord_sb_totalpaid@label}</b></td>
+		<td align="right">(${record.custrecord_sb_totalpaid})</td>
+		</tr>
+		</#if>
+		<tr class="totalrow">
+		<td class="total-text cell-dark"><b>Balance Due:</b></td>
+		<td align="right" class="total-text bordtop bordright bordbot">${record.custrecord_sb_amountdue}</td>
+		</tr>
+		<!-- What is this next row doing? -->
+		<tr>
+		<td><b>${record.custrecord_sb_pay_method@label}</b></td>
+		<td align="right"><b>${record.custrecord_sb_pay_method}</b></td>
+		</tr>
+		<tr>
+		<td colspan="2">
+		<p class="note">&nbsp;</p>
+
+		<p style="text-align: left;">1. Freight, brokerage, duties may be calculated upon shipment.</p>
+
+		<p style="text-align: left;">2. Actual sales tax/VAT may be invoiced upon shipment. Send any exemptions to ar@unifiedcommunications.com.</p>
+
+		<p>&nbsp;</p>
+		</td>
+		</tr></table>
+	</td>
+	</tr></table>
+</body>
+</pdf>
