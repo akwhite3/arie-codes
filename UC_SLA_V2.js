@@ -3,7 +3,7 @@
  * Scheduled Script 
  * 
  * Background: 
- * Used to track the progress of given SLA's 
+ * Used to track the progress of given SLA's (service level agreements)
  * Functionality is typically added on an as needed basis. 
  * This is Version 2 of this script. The original is not currently in use. 
  * This will be the script to update moving forward.
