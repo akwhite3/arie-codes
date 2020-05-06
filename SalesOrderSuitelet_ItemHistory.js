@@ -1,5 +1,11 @@
 /*******************
  * Suitelet Script 
+ 
+ * This script is used as a part of the Order Entry User Interface 
+ * This page launches a pop up window and passes customer information to get a review of the customer's item history 
+ 
+ * The user is also able to specify a quantity and add the item to the order from this page 
+ 
  *******************/
 
 function createPage(request, response) {
@@ -8,6 +14,8 @@ function createPage(request, response) {
         form.setScript('customscript_so_suitelet_history_c');
         form.addButton('custpage_additems', 'Add to Order', 'addItems();');
         var customerField = form.addField('customer', 'integer', 'customer').setDisplayType('hidden');
+        
+        //retrieve customer ID from parameter passed in URL 
         var customer = request.getParameter('cust');
         customerField.setDefaultValue(customer);
         var addByPrice = form.addField('custpage_addbyprice', 'checkbox', 'Match Last Purchase Price');
@@ -23,7 +31,7 @@ function createPage(request, response) {
         historyList.addField('rate', 'currency', 'Price Last Purchased');
         historyList.addField('margin', 'float', 'Margin').setDisplayType('inline');
 
-        //search by transaction 
+        //search transactions
         var salesorderSearch = nlapiSearchRecord("salesorder", null,
             [
                 ["type", "anyof", "SalesOrd"],
@@ -79,6 +87,7 @@ function createPage(request, response) {
 
                 var pricing = pricingSearch[0];
 
+                //populate the sublist with search results 
                 historyList.setLineItemValue('item', i + 1, item);
                 historyList.setLineItemValue('qty', i + 1, result.getValue("quantity", null, "SUM"));
                 historyList.setLineItemValue('datepurchased', i + 1, result.getValue("trandate", null, "MAX"));
