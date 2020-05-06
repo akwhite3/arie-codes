@@ -1,6 +1,24 @@
 /*************************
  *  *UC Summary Billing*
  *  Created by: Arie White 
+ 
+ 
+ *Background:
+ 
+ Suitelet script:
+ - landing page and subsequent page take user input to form search criteria
+ - the user is provided with a list of applicable records to choose from 
+ - the user checks a box to select invoices and the user submits 
+ 
+ POST:
+ - user input is taken and records are generated to support consolidated invoice. 
+ (Summary Bill Transaction Line custom record)
+ (Summary Bill custom record)
+ 
+ Client script:
+ - checks for user error 
+ - displays search results
+ 
  *************************/
 
 /*************************
