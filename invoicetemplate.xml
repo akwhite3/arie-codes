@@ -38,16 +38,16 @@
 	<tr>
 	<td colspan="2"><#if record.custrecord_sb_currency == "Canadian Dollar">
 	<table><tr>
-		<td style="font-size: 7pt;">UnifiedCommunications.com, Inc.<br />1285 West Broadway, #600<br />Vancouver, BC V6H 3X8</td>
-		<td style="font-size: 7pt;">Phone: ${companyInformation.phone}<br />Fax: ${companyInformation.fax}<br />Billing: (800) 641-6416</td>
-		<td style="font-size: 7pt;">Sales: Sales@unifiedcommunications.com<br />AR: AR@unifiedcommunications.com</td>
+		<td style="font-size: 7pt;">yoursite.com, Inc.<br />Address<br />City, State, Zip</td>
+		<td style="font-size: 7pt;">Phone: ${companyInformation.phone}<br />Fax: ${companyInformation.fax}<br />Billing: (800) 111-6400</td>
+		<td style="font-size: 7pt;">Sales: Sales@yoursite.com<br />AR: AR@yoursite.com</td>
 		</tr></table>
 	<#else>
 
 	<table><tr>
-		<td style="font-size: 7pt;">Tele-Communication, Inc.<br />2075 East Governors Circle<br />Houston, TX 77092, USA</td>
-		<td style="font-size: 7pt;">Phone: ${companyInformation.phone}<br />Fax: ${companyInformation.fax}<br />Billing: (800) 641-6416 Ext. 120</td>
-		<td style="font-size: 7pt;">Sales: Sales@unifiedcommunications.com<br />AR: AR@unifiedcommunications.com</td>
+		<td style="font-size: 7pt;">Your Company, Inc.<br />2075 East Governors Circle<br />Houston, TX 77092, USA</td>
+		<td style="font-size: 7pt;">Phone: ${companyInformation.phone}<br />Fax: ${companyInformation.fax}<br />Billing: (800) 111-6400 Ext. 120</td>
+		<td style="font-size: 7pt;">Sales: Sales@yoursite.com<br />AR: AR@yoursite.com</td>
 		</tr></table>
 	</#if></td>
 	</tr></table>
@@ -316,7 +316,7 @@
 
 <table class="total" style="width: 100%; margin-top: 10px;"><tr><#assign taxLINES = record.custrecord_sb_taxrate?split('|')><#assign credittaxLINES = record.custrecord_sb_credit_tax?split('|')><#if iNum == 0>
 	<td width="60%">
-	<p class="note" style="padding-top: 24px;">RETURN/EXCHANGE POLICY: Headset products including Plantronics &amp; Jabra generally have a 30-day return/exchange policy except for special-build items. For other products and services, we base our return rules on our manufacturers&#39; and distributors&#39; policies that often involve restocking fees and sometimes attempt to prohibit returns altogether; in such cases we negotiate on our customers&rsquo; behalf for exceptions, but we cannot guarantee that returns will be possible when manufacturers and distributors refuse to accept them. Please request return policies or Return Authorizations from your account manager before returning products. If the return is an authorized exchange due to product failure that occurred within 14 days of customer&#39;s receipt of the product, we will pay return and replacement ground shipping for US orders only. Shipping returns is the customer&rsquo;s responsibility unless otherwise agreed. See our latest return/exchange policy:<br />http://www.unifiedcommunications.com/t-returns.aspx</p>
+	<p class="note" style="padding-top: 24px;">RETURN/EXCHANGE POLICY: Headset products including Plantronics &amp; Jabra generally have a 30-day return/exchange policy except for special-build items. For other products and services, we base our return rules on our manufacturers&#39; and distributors&#39; policies that often involve restocking fees and sometimes attempt to prohibit returns altogether; in such cases we negotiate on our customers&rsquo; behalf for exceptions, but we cannot guarantee that returns will be possible when manufacturers and distributors refuse to accept them. Please request return policies or Return Authorizations from your account manager before returning products. If the return is an authorized exchange due to product failure that occurred within 14 days of customer&#39;s receipt of the product, we will pay return and replacement ground shipping for US orders only. Shipping returns is the customer&rsquo;s responsibility unless otherwise agreed. See our latest return/exchange policy:<br />http://www.yoursite.com/t-returns.aspx</p>
 	</td>
 	<td align="right" width="40%">
 	<table style="margin: 0 5px 0 15px;" width="100%"><tr>
@@ -363,7 +363,7 @@
 		<td class="total-text cell-dark"><b>Balance Due:</b></td>
 		<td align="right" class="total-text bordtop bordright bordbot">${record.custrecord_sb_amountdue}</td>
 		</tr>
-		<!-- What is this next row doing? -->
+		<!-- payments -->
 		<tr>
 		<td><b>${record.custrecord_sb_pay_method@label}</b></td>
 		<td align="right"><b>${record.custrecord_sb_pay_method}</b></td>
@@ -374,7 +374,7 @@
 
 		<p style="text-align: left;">1. Freight, brokerage, duties may be calculated upon shipment.</p>
 
-		<p style="text-align: left;">2. Actual sales tax/VAT may be invoiced upon shipment. Send any exemptions to ar@unifiedcommunications.com.</p>
+		<p style="text-align: left;">2. Actual sales tax/VAT may be invoiced upon shipment. Send any exemptions to ar@yoursite.com.</p>
 
 		<p>&nbsp;</p>
 		</td>
