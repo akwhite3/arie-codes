@@ -24,6 +24,8 @@ function userRequest(request, response) {
         }
 
         form.addButton('customreset', 'Reset', 'resetValues();');
+        
+        /*user instructions*/
         var htmlHeader = form.addField('custpage_header', 'inlinehtml').setLayoutType('outsideabove', 'startrow');
         var htmlText = "<big><p><big>How to use:</big></p>";
         htmlText += "Select an item or enter a purchase cost<br>";
@@ -58,6 +60,7 @@ function userRequest(request, response) {
         discountField.setLayoutType('endrow');
         form.addField('purchase_price', 'currency', 'Our Cost ($)', null, 'calculator_info').setDefaultValue(0);
 
+        /*show quantities available for vendors*/
         if (mode != 'so') {
             form.addField('scansource_qty', 'text', 'Scansource Qty', null, 'item_info').setDisplayType("disabled");
             form.addField('jenne_qty', 'text', 'Jenne Qty', null, 'item_info').setDisplayType("disabled");
