@@ -9,7 +9,7 @@ function sendWebinar() {
     {
         var campaign = nlapiGetFieldValue('leadsource');
 
-        //Webinar - Device-a-thon 3.0 2019 Q1
+        //Webinar campaigns
         if (campaign == '9125') {
             sendDeviceAThon();
         }
@@ -25,13 +25,13 @@ function sendWebinar() {
 
 /**COPY AND CHANGE */
 function sendDeviceAThon() {
-    var author = '395718'; //Marketing Events
+    var author = '111111'; //Marketing Events
     var recipient = nlapiGetFieldValue('email');
-    var subject = '[Registration Confirmation] Device-a-thon: Microsoft Teams Devices Webinar';
+    var subject = '[Title of Event]';
     var body = deviceAThonHTML();
     var records = new Object();
     records['entity'] = nlapiGetFieldValue('internalid');
-    var replyTo = 'keileraas@unifiedcommunications.com';
+    var replyTo = ; //email here
 
     if (recipient != null && recipient != '') {
         try {
@@ -46,15 +46,15 @@ function sendDeviceAThon() {
         catch (e) {
             nlapiLogExecution('debug', 'failed', 'author=' + author + ' recip=' + recipient + ' subject=' + subject);
 
-            nlapiSendEmail(899, 'ksmith@unifiedcommunications.com; afeinberg@unifiedcommunications.com', 'DeviceAThon Email Send Error', 'Error: ' + e.message + ' for contact ' + nlapiGetFieldValue('entityid'));
+            nlapiSendEmail(899, 'emaillisthere', 'Email Send Error', 'Error: ' + e.message + ' for contact ' + nlapiGetFieldValue('entityid'));
         }
     }
 }
 
 function reminderEmail() {
 
-    var author = '395718'; //Marketing Events
-    var replyTo = 'msossamon@unifiedcommunications.com';
+    var author = '111111'; //Marketing Events
+    var replyTo = 'email@psuedodomain.com';
 
     //saved search to get email list 
     var customerSearch = nlapiSearchRecord("customer", null,
@@ -63,7 +63,7 @@ function reminderEmail() {
             "AND",
             ["email", "doesnotcontain", "msossamon"],
             "AND",
-            ["email", "doesnotcontain", "@unifiedcommunications.com"],
+            ["email", "doesnotcontain", "@yoursite.com"],
             "AND",
             ["email", "doesnotcontain", "test@"],
             "AND",
@@ -142,33 +142,33 @@ function reminderEmail() {
 
                 if (context.getDeploymentId() == 'customdeploy1') {
                     //Day before reminder 
-                    subject = '[Webinar Reminder] Surface Hub 2S: The Experience starts tomorrow'
+                    subject = '[Webinar Reminder] TITLE starts tomorrow'
                     body = dayBefore();
                 }
 
                 else if (context.getDeploymentId() == 'customdeploy2') {
                     //Hour before reminder 
                     body = dayOf(firstName);
-                    subject = '“[Webinar Reminder] Surface Hub 2S: The Experience starts soon';
+                    subject = '“[Webinar Reminder] TITLE: The Experience starts soon';
                 }
 
                 else if (context.getDeploymentId() == 'customdeploy3') {
                     //After and survey 
                     body = afterWebinar(firstName);
-                    subject = 'Webinar recording and Q&A from “Surface Hub 2S: The Experience"';
+                    subject = 'Webinar recording and Q&A from “TITLE"';
                 }
                 else {
                     body = disregardEmail(firstName);
-                    subject = 'Please disregard "Surface Hub 2S: The Experience" webinar reminder'
+                    subject = 'Please disregard TITLE" webinar reminder'
                 }
 
 
-                nlapiSendEmail(author, recipient, subject, body, null, 'awhite@unifiedcommunications.com', records, null, null, null, replyTo);
+                nlapiSendEmail(author, recipient, subject, body, null, 'awhite@placeholder.com, records, null, null, null, replyTo);
 
             }
             catch (e) {
                 nlapiLogExecution('debug', 'failed', 'author=' + author + ' recip=' + recipient + ' subject=' + subject);
-                nlapiSendEmail(899, 'ksmith@unifiedcommunications.com; afeinberg@unifiedcommunications.com; awhite@unifiedcommunications.com', 'Surface Hub 2S Email Send Error', 'Error: ' + e.message + ' for contact ' + nlapiGetFieldValue('entityid'));
+                nlapiSendEmail(899, 'email@placeholder.com', 'Email Send Error', 'Error: ' + e.message + ' for contact ' + nlapiGetFieldValue('entityid'));
             }
         }
     }
@@ -183,33 +183,33 @@ function reminderEmail() {
 
             if (context.getDeploymentId() == 'customdeploy1') {
                 //Day before reminder 
-                subject = '[Webinar Reminder] Surface Hub 2S: The Experience starts tomorrow'
+                subject = '[Webinar Reminder] Title starts tomorrow'
                 body = dayBefore();
             }
 
             else if (context.getDeploymentId() == 'customdeploy2') {
                 //Hour before reminder 
-                subject = '“[Webinar Reminder] Surface Hub 2S: The Experience starts soon';
+                subject = '“[Webinar Reminder] Title starts soon';
                 body = dayOf(firstName);
             }
 
             else if (context.getDeploymentId() == 'customdeploy3') {
                 //After and survey 
-                subject = 'Webinar recording and Q&A from “Surface Hub 2S: The Experience"';
+                subject = 'Webinar recording and Q&A from “Title"';
                 body = afterWebinar(firstName);
             }
             else {
                 body = disregardEmail(firstName);
-                subject = 'Please disregard "Surface Hub 2S: The Experience" webinar reminder'
+                subject = 'Please disregard "Title" webinar reminder'
             }
 
-            var recipient = 'awhite@unifiedcommunications.com';
+            var recipient = 'awhite@placeholder.com;
             nlapiSendEmail(author, recipient, subject, body, null, null, null, null, null, null, replyTo);
 
         }
         catch (e) {
             nlapiLogExecution('debug', 'failed', 'author=' + author + ' recip=' + recipient + ' subject=' + subject);
-            nlapiSendEmail(899, 'ksmith@unifiedcommunications.com; afeinberg@unifiedcommunications.com; awhite@unifiedcommunications.com', 'Surface Hub 2S Email Send Error', 'Error: ' + e.message + ' for contact ' + nlapiGetFieldValue('entityid'));
+            nlapiSendEmail(899, 'email@placeholder.com', 'Event  Title Email Send Error', 'Error: ' + e.message + ' for contact ' + nlapiGetFieldValue('entityid'));
         }
     }
 }
@@ -217,12 +217,12 @@ function reminderEmail() {
 function sendSurfaceHubCollab() {
     var author = '395718'; //Marketing Events
     var recipient = nlapiGetFieldValue('email');
-    var subject = '[Registration Confirmation] Surface Hub 2S: The Experience Webinar';
+    var subject = '[Registration Confirmation] Title';
     //CHANGE THE BODY FUNCTION
     var body = surfaceHubHTML();
     var records = new Object();
     records['entity'] = nlapiGetFieldValue('internalid');
-    var replyTo = 'keileraas@unifiedcommunications.com';
+    var replyTo = 'person@placeholder.com;
 
     if (recipient != null && recipient != '') {
         try {
@@ -231,14 +231,14 @@ function sendSurfaceHubCollab() {
 
             var leadID = nlapiGetFieldValue('id');
             var lead = nlapiLoadRecord('customer', leadID);
-            lead.setFieldValue('custentity_camp_email_sent', 'T');
+            lead.setFieldValue('email_sent', 'T');
             nlapiSubmitRecord(lead);
         }
         catch (e) {
             nlapiLogExecution('debug', 'failed', 'author=' + author + ' recip=' + recipient + ' subject=' + subject);
 
             /**ADD MYSELF ON CC */
-            nlapiSendEmail(899, 'ksmith@unifiedcommunications.com; afeinberg@unifiedcommunications.com; awhite@unifiedcommunications.com', 'Surface Hub 2S Email Send Error', 'Error: ' + e.message + ' for contact ' + nlapiGetFieldValue('entityid'));
+            nlapiSendEmail(899, 'email@placeholder.com', 'Email Send Error', 'Error: ' + e.message + ' for contact ' + nlapiGetFieldValue('entityid'));
         }
     }
 }
@@ -263,9 +263,9 @@ function deviceAThonHTML() {
     body += '									<tr>';
     body += '										<td width="161" style="width:120.75pt; padding:15.0pt 0in 11.25pt 7.5pt">';
     body += '											<p class="x_x_MsoNormal">';
-    body += '												<a href="http://www.unifiedcommunications.com/" target="_blank" rel="noopener noreferrer" data-auth="NotApplicable" title="Visit UnifiedCommunications.com" id="LPlnk129286" class="x_OWAAutoLink" data-ogsc="" style="color: rgb(66, 66, 66);">';
+    body += '												<a href="http://www.thesite.com/" target="_blank" rel="noopener noreferrer" data-auth="NotApplicable" title="Visit yoursite.com" id="LPlnk129286" class="x_OWAAutoLink" data-ogsc="" style="color: rgb(66, 66, 66);">';
     body += '                                               	<span style="text-decoration:none">';
-    body += '														<img data-imagetype="External" src="https://www.unifiedcommunications.com/skins/Skin_1/img/logo.png" border="" width="161" id="x_x__x0000_i1025" alt="UnifiedCommunications Logo" style="width:3in; display: block; margin-left: auto; margin-right: auto">';
+    body += '														<img data-imagetype="External" src="https://www.thesite.com/skins/Skin_1/img/logo.png" border="" width="161" id="x_x__x0000_i1025" alt="Your Site Logo" style="width:3in; display: block; margin-left: auto; margin-right: auto">';
     body += '                                               	</span>';
     body += '												</a>';
     body += '											</p>';
@@ -385,7 +385,7 @@ function deviceAThonHTML() {
     body += '																																	<td width="120" style="width: 1.25in; border: 1.5pt solid #366ab3; padding: 0in; height: 27pt;" data-ogsb="white">';
     body += '																																		<div>';
     body += '																																			<p class="x_x_MsoNormal" align="center" style="text-align:center">';
-    body += '																																				<a href="https://www.unifiedcommunications.com/documents/doc/TeamsWebinar.ics" target="_blank" rel="noopener noreferrer" data-auth="NotApplicable" title="Add to Calendar" id="LPlnk681537" class="x_OWAAutoLink" data-ogsc="" style="color: rgb(228, 159, 255);">';
+    body += '																																				<a href="https://www.yoursite.com/documents/doc/TeamsWebinar.ics" target="_blank" rel="noopener noreferrer" data-auth="NotApplicable" title="Add to Calendar" id="LPlnk681537" class="x_OWAAutoLink" data-ogsc="" style="color: rgb(228, 159, 255);">';
     body += '																																				<b>';
     body += '																																				<span style="font-size: 9pt; font-family: Helvetica, sans-serif, serif, EmojiFont; color: rgb(63, 63, 63); text-decoration: none;">Add to Calendar</span>';
     body += '																																				</b>';
@@ -497,8 +497,8 @@ function deviceAThonHTML() {
     body += '										<td valign="top" style="padding:0in 0in 0in 0in">';
     body += '											<p class="x_x_infooter1" align="center" style="text-align:center">';
     body += '												<span style="font-size: 8.5pt; font-family: Helvetica, sans-serif, serif, EmojiFont; color: rgb(195, 195, 195);" data-ogsc="rgb(153, 153, 153)">';
-    body += '													<a href="https://www.google.com/maps/place/2075+E+Governors+Cir,+Houston,+TX+77092/@29.806549,-95.448371" target="_blank" rel="noopener noreferrer" data-auth="NotApplicable" title="View Map" id="LPlnk479088" class="x_OWAAutoLink" data-ogsc="" style="color: rgb(228, 159, 255);">';
-    body += '														<span style="color: rgb(63, 63, 63); text-decoration: none;" data-ogsc="rgb(153, 153, 153)">UnifiedCommunications.com, 2075 East Governors Circle, Houston, TX 77092 </span>';
+    body += '													<a href="https://www.google.com/maps/place/200+W+Anywhere+St,+Houston,+TX+77373/@9.806509,-195.448371" target="_blank" rel="noopener noreferrer" data-auth="NotApplicable" title="View Map" id="LPlnk479088" class="x_OWAAutoLink" data-ogsc="" style="color: rgb(228, 159, 255);">';
+    body += '														<span style="color: rgb(63, 63, 63); text-decoration: none;" data-ogsc="rgb(153, 153, 153)">Address Here </span>';
     body += '													</a>';
     body += '												</span>';
     body += '											</p>';
@@ -541,9 +541,9 @@ function surfaceHubHTML() {
     body += '									<tr>';
     body += '										<td width="161" style="width:120.75pt; padding:15.0pt 0in 11.25pt 7.5pt">';
     body += '											<p class="x_x_MsoNormal">';
-    body += '												<a href="http://www.unifiedcommunications.com/" target="_blank" rel="noopener noreferrer" data-auth="NotApplicable" title="Visit UnifiedCommunications.com" id="LPlnk129286" class="x_OWAAutoLink" data-ogsc="" style="color: rgb(66, 66, 66);">';
+    body += '												<a href="http://www.yoursite.com/" target="_blank" rel="noopener noreferrer" data-auth="NotApplicable" title="Visit yoursite.com" id="LPlnk129286" class="x_OWAAutoLink" data-ogsc="" style="color: rgb(66, 66, 66);">';
     body += '                                               	<span style="text-decoration:none">';
-    body += '														<img data-imagetype="External" src="https://www.unifiedcommunications.com/skins/Skin_1/img/logo.png" border="" width="161" id="x_x__x0000_i1025" alt="UnifiedCommunications Logo" style="width:3in; display: block; margin-left: auto; margin-right: auto">';
+    body += '														<img data-imagetype="External" src="https://www.yoursite.com/skins/Skin_1/img/logo.png" border="" width="161" id="x_x__x0000_i1025" alt="Your Site Logo" style="width:3in; display: block; margin-left: auto; margin-right: auto">';
     body += '                                               	</span>';
     body += '												</a>';
     body += '											</p>';
@@ -626,7 +626,7 @@ function surfaceHubHTML() {
     body += '																								<td width="84%" valign="top" style="width:84.0%; padding:0in 0in 0in 0in">';
     body += '																									<p class="x_x_subheadstyle" style="margin:0in; margin-bottom:.0001pt; line-height:21.0pt">';
     body += '																										<b>';
-    body += '																										<span style="font-size: 15pt; font-family: Helvetica, sans-serif, serif, EmojiFont; color: rgb(63, 63, 63);" data-ogsc="rgb(51, 51, 51)">Surface Hub 2S: The Experience';
+    body += '																										<span style="font-size: 15pt; font-family: Helvetica, sans-serif, serif, EmojiFont; color: rgb(63, 63, 63);" data-ogsc="rgb(51, 51, 51)">Event  Title: The Experience';
     body += '																										</span>';
     body += '																										</b>';
     body += '																									</p>';
@@ -663,7 +663,7 @@ function surfaceHubHTML() {
     body += '																																	<td width="120" style="width: 1.25in; border: 1.5pt solid #366ab3; padding: 0in; height: 27pt;" data-ogsb="white">';
     body += '																																		<div>';
     body += '																																			<p class="x_x_MsoNormal" align="center" style="text-align:center">';
-    body += '																																				<a href="http://unifiedcommunications.com/documents/doc/SurfaceHub2STheExperienceWebinarByUnifiedCommunications.ics" target="_blank" rel="noopener noreferrer" data-auth="NotApplicable" title="Add to Calendar" id="LPlnk681537" class="x_OWAAutoLink" data-ogsc="" style="color: white">';
+    body += '																																				<a href="fileurl.ics" target="_blank" rel="noopener noreferrer" data-auth="NotApplicable" title="Add to Calendar" id="LPlnk681537" class="x_OWAAutoLink" data-ogsc="" style="color: white">';
     body += '																																				<b>';
     body += '																																				<span style="font-size: 9pt; font-family: Helvetica, sans-serif, serif, EmojiFont; color: rgb(63, 63, 63); text-decoration: none;">Add to Calendar</span>';
     body += '																																				</b>';
@@ -735,7 +735,7 @@ function surfaceHubHTML() {
     body += '																				<div>';
     body += '																					<p class="x_x_MsoNormal" align="center" style="text-align:center">';
     body += '																						<span style="color:white">';
-    body += '																							<a href="https://teams.microsoft.com/l/meetup-join/19%3ameeting_NDJmZDk0MWQtZGY0Ny00MTcwLTk1YjUtNzEyNmY2ODMyZDVk%40thread.v2/0?context=%7b%22Tid%22%3a%2291d501ab-004e-444d-93e8-f7e8fbd65bfb%22%2c%22Oid%22%3a%22e69a2426-6c58-467e-8b40-a6a0faefb2f0%22%2c%22IsBroadcastMeeting%22%3atrue%7d" target="_blank" rel="noopener noreferrer" data-auth="NotApplicable" title="Join The Webinar" id="LPlnk646404" class="x_OWAAutoLink" data-ogsc="" style="color: white;">';
+    body += '																							<a href="https://teams.microsoft.com/l/meetup-join/meetingurl" target="_blank" rel="noopener noreferrer" data-auth="NotApplicable" title="Join The Webinar" id="LPlnk646404" class="x_OWAAutoLink" data-ogsc="" style="color: white;">';
     body += '																								<span style="font-size: 10pt; font-family: Helvetica, sans-serif, serif, EmojiFont; color: white; text-transform: uppercase; letter-spacing: 1.5pt; text-decoration: none;">Join The Webinar</span>';
     body += '																								<span style="font-size: 10pt; font-family: Helvetica, sans-serif, serif, EmojiFont; text-transform: uppercase; letter-spacing: 1.5pt; text-decoration: none;"></span>';
     body += '																							</a>';
@@ -775,8 +775,8 @@ function surfaceHubHTML() {
     body += '										<td valign="top" style="padding:0in 0in 0in 0in">';
     body += '											<p class="x_x_infooter1" align="center" style="text-align:center">';
     body += '												<span style="font-size: 8.5pt; font-family: Helvetica, sans-serif, serif, EmojiFont; color: rgb(195, 195, 195);" data-ogsc="rgb(153, 153, 153)">';
-    body += '													<a href="https://www.google.com/maps/place/2075+E+Governors+Cir,+Houston,+TX+77092/@29.806549,-95.448371" target="_blank" rel="noopener noreferrer" data-auth="NotApplicable" title="View Map" id="LPlnk479088" class="x_OWAAutoLink" data-ogsc="" style="color:#366ab3;">';
-    body += '														<span style="color: rgb(63, 63, 63); text-decoration: none;" data-ogsc="rgb(153, 153, 153)">UnifiedCommunications.com, 2075 East Governors Circle, Houston, TX 77092 </span>';
+    body += '													<a href="https://www.google.com/maps/place/addressstringhere/@coordinateshere" target="_blank" rel="noopener noreferrer" data-auth="NotApplicable" title="View Map" id="LPlnk479088" class="x_OWAAutoLink" data-ogsc="" style="color:#366ab3;">';
+    body += '														<span style="color: rgb(63, 63, 63); text-decoration: none;" data-ogsc="rgb(153, 153, 153)">Address</span>';
     body += '													</a>';
     body += '												</span>';
     body += '											</p>';
@@ -806,14 +806,13 @@ function dayOf(firstName) {
     body += '<div align="center">';
     body += '   <table class="x_x_MsoNormalTable" style="width: 6.25in; border-collapse: collapse;" border="0" width="600" cellspacing="0" cellpadding="0">';
     body += '       <tbody>';
-    body += '           <tr>';
     body += '               <td style="padding: 0in 0in 0in 0in;" valign="top"><br />';
     body += '                   <div align="center">';
     body += '                       <table class="x_x_MsoNormalTable" style="width: 100.0%; border-collapse: collapse;" border="0" width="100%" cellspacing="0" cellpadding="0">';
     body += '                           <tbody>';
     body += '                                <tr>';
     body += '                                   <td style="width: 120.75pt; padding: 15.0pt 0in 11.25pt 7.5pt;" width="161">';
-    body += '                                       <p align="center" class="x_x_MsoNormal"><a id="LPlnk129286" class="x_OWAAutoLink" style="color: #424242;" title="Visit UnifiedCommunications.com" href="http://www.unifiedcommunications.com/" target="_blank" rel="noopener noreferrer" data-auth="NotApplicable" data-ogsc=""><span style="text-decoration: none;"><img align="middle" id="x_x__x0000_i1025" style="width: 3in; display: block; margin-left: auto; margin-right: auto;" src="https://www.unifiedcommunications.com/skins/Skin_1/img/logo.png" alt="UnifiedCommunications Logo" width="161" border="" data-imagetype="External" /> </span> </a></p>';
+    body += '                                       <p align="center" class="x_x_MsoNormal"><a id="LPlnk129286" class="x_OWAAutoLink" style="color: #424242;" title="Visit yoursite.com" href="http://www.yoursite.com/" target="_blank" rel="noopener noreferrer" data-auth="NotApplicable" data-ogsc=""><span style="text-decoration: none;"><img align="middle" id="x_x__x0000_i1025" style="width: 3in; display: block; margin-left: auto; margin-right: auto;" src="https://www.yoursite.com/skins/Skin_1/img/logo.png" alt="Your Site Logo" width="161" border="" data-imagetype="External" /> </span> </a></p>';
     body += '                                   </td>';
     body += '                               </tr>';
     body += '                           </tbody>';
@@ -833,7 +832,7 @@ function dayOf(firstName) {
     body += '                                               <tr>';
     body += '                                                   <td style="width: 8.0%; padding: 0in 0in 0in 0in;" width="8%">&nbsp;</td>';
     body += '                                                   <td style="width: 84.0%; padding: 0in 0in 0in 0in;" valign="top" width="84%"><br />';
-    body += '                                                       <p class="x_x_topheader" style="margin: 0in; margin-bottom: .0001pt; text-align: center; line-height: 21.0pt;" align="center"><strong><span style="font-size: 21pt; font-family: Helvetica, sans-serif, serif, EmojiFont;" data-ogsc="rgb(51, 51, 51)">The "Surface Hub 2S: The Experience" webinar starts soon!</span></strong></p>';
+    body += '                                                       <p class="x_x_topheader" style="margin: 0in; margin-bottom: .0001pt; text-align: center; line-height: 21.0pt;" align="center"><strong><span style="font-size: 21pt; font-family: Helvetica, sans-serif, serif, EmojiFont;" data-ogsc="rgb(51, 51, 51)">The "Event  Title: The Experience" webinar starts soon!</span></strong></p>';
     body += '                                                   </td>';
     body += '                                                   <td style="width: 8.0%; padding: 0in 0in 0in 0in;" width="8%">&nbsp;</td>';
     body += '                                               </tr>';
@@ -843,7 +842,7 @@ function dayOf(firstName) {
     body += '                                               <tr>';
     body += '                                                   <td style="width: 8.0%; padding: 0in 0in 0in 0in;" width="8%">&nbsp;</td>';
     body += '                                                   <td style="width: 84.0%; padding: 0in 0in 0in 0in;" valign="top" width="84%">';
-    body += '                                                       <p class="x_x_bodycopy" style="margin: 0in; margin-bottom: .0001pt; line-height: 13.0pt;"><span style="font-size: 8.8pt; font-family: Helvetica, sans-serif, serif, EmojiFont;" data-ogsc="rgb(77, 77, 77)"><br>Hi ' + firstName + ', <br /><br />You\'ve registered for today\'s webinar, <strong>Surface Hub 2S: The Experience</strong>.<br /><br /> The webinar will begin shortly at 10:00 PT / 10:00 MT / 12:00 CT / 1:00 ET.</span></p>';
+    body += '                                                       <p class="x_x_bodycopy" style="margin: 0in; margin-bottom: .0001pt; line-height: 13.0pt;"><span style="font-size: 8.8pt; font-family: Helvetica, sans-serif, serif, EmojiFont;" data-ogsc="rgb(77, 77, 77)"><br>Hi ' + firstName + ', <br /><br />You\'ve registered for today\'s webinar, <strong>Event  Title: The Experience</strong>.<br /><br /> The webinar will begin shortly at 10:00 PT / 10:00 MT / 12:00 CT / 1:00 ET.</span></p>';
     body += '                                                   </td>';
     body += '                                                   <td style="width: 8.0%; padding: 0in 0in 0in 0in;" width="8%">&nbsp;</td>';
     body += '                                               </tr>';
@@ -866,7 +865,7 @@ function dayOf(firstName) {
     body += '                                                               </tbody>';
     body += '                                                           </table>';
     body += '                                                       </div>';
-    body += '                                                       <span style="font-size: 9pt; font-family: Helvetica, sans-serif, serif, EmojiFont;"><br><br>See you there!<br /><br />UnifiedCommunications.com Team</span></td>';
+    body += '                                                       <span style="font-size: 9pt; font-family: Helvetica, sans-serif, serif, EmojiFont;"><br><br>See you there!<br /><br />yoursite.com Team</span></td>';
     body += '                                               </tr>';
     body += '                                           </tbody>';
     body += '                                       </table>';
@@ -887,7 +886,7 @@ function dayOf(firstName) {
     body += '        <tbody>';
     body += '           <tr>';
     body += '               <td style="padding: 0in 0in 0in 0in;" valign="top">';
-    body += '                   <p class="x_x_infooter1" style="text-align: center;" align="center"><span style="font-size: 8.5pt; font-family: Helvetica, sans-serif, serif, EmojiFont; color: #c3c3c3;" data-ogsc="rgb(153, 153, 153)"><a class="x_OWAAutoLink" style="color: #e49fff;" title="View Map" href="https://www.google.com/maps/place/2075+E+Governors+Cir,+Houston,+TX+77092/@29.806549,-95.448371" target="_blank" rel="noopener noreferrer" data-auth="NotApplicable" data-ogsc=""><span style="color: #3f3f3f; text-decoration: none;" data-ogsc="rgb(153, 153, 153)">UnifiedCommunications.com, 2075 East Governors Circle, Houston, TX 77092</span></a></span></p>';
+    body += '                   <p class="x_x_infooter1" style="text-align: center;" align="center"><span style="font-size: 8.5pt; font-family: Helvetica, sans-serif, serif, EmojiFont; color: #c3c3c3;" data-ogsc="rgb(153, 153, 153)"><a class="x_OWAAutoLink" style="color: #e49fff;" title="View Map" href="https://www.google.com/maps/place/address+@coordinates" target="_blank" rel="noopener noreferrer" data-auth="NotApplicable" data-ogsc=""><span style="color: #3f3f3f; text-decoration: none;" data-ogsc="rgb(153, 153, 153)">yoursite.com, 2075 East Governors Circle, Houston, TX 77092</span></a></span></p>';
     body += '               </td>';
     body += '           </tr>';
     body += '       </tbody>';
@@ -909,7 +908,7 @@ function dayBefore() {
     body += '                           <tbody>';
     body += '                               <tr>';
     body += '                                   <td style="width: 120.75pt; padding: 15pt 0in 11.25pt 7.5pt; text-align: center; vertical-align: middle;" width="161"><br />';
-    body += '                                       <p class="x_x_MsoNormal" align="center"><a class="x_OWAAutoLink" style="color: #424242;" title="Visit UnifiedCommunications.com" href="http://www.unifiedcommunications.com/" target="_blank" rel="noopener noreferrer" data-auth="NotApplicable" data-ogsc=""> <span style="text-decoration: none;"> <img id="x_x__x0000_i1025" style="width: 3in; display: block; margin-left: auto; margin-right: auto;" src="https://www.unifiedcommunications.com/skins/Skin_1/img/logo.png" alt="UnifiedCommunications Logo" width="161" align="middle" border="" data-imagetype="External" /></span></a><a id="LPlnk129286" class="x_OWAAutoLink" style="color: #424242;" title="Visit UnifiedCommunications.com" href="http://www.unifiedcommunications.com/" target="_blank" rel="noopener noreferrer" data-auth="NotApplicable" data-ogsc=""></a></p>';
+    body += '                                       <p class="x_x_MsoNormal" align="center"><a class="x_OWAAutoLink" style="color: #424242;" title="Visit yoursite.com" href="http://www.yoursite.com/" target="_blank" rel="noopener noreferrer" data-auth="NotApplicable" data-ogsc=""> <span style="text-decoration: none;"> <img id="x_x__x0000_i1025" style="width: 3in; display: block; margin-left: auto; margin-right: auto;" src="https://www.yoursite.com/skins/Skin_1/img/logo.png" alt="Your Site Logo" width="161" align="middle" border="" data-imagetype="External" /></span></a><a id="LPlnk129286" class="x_OWAAutoLink" style="color: #424242;" title="Visit yoursite.com" href="http://www.yoursite.com/" target="_blank" rel="noopener noreferrer" data-auth="NotApplicable" data-ogsc=""></a></p>';
     body += '                                   </td>';
     body += '                               </tr>';
     body += '                           </tbody>';
@@ -924,7 +923,7 @@ function dayBefore() {
     body += '                                               <tr style="height: 82px;">';
     body += '                                                   <td style="width: 8%; padding: 0in; height: 82px;" width="8%">&nbsp;</td>';
     body += '                                                   <td style="width: 84%; padding: 0in; height: 82px;" valign="top" width="84%"><br />';
-    body += '                                                        <p class="x_x_topheader" style="margin: 0in; margin-bottom: .0001pt; text-align: center; line-height: 21.0pt;" align="center"><strong><span style="font-size: 21pt; font-family: Helvetica, sans-serif, serif, EmojiFont;" data-ogsc="rgb(51, 51, 51)">Reminder: "Surface Hub 2S: The Experience" webinar is tomorrow!</span></strong></p>';
+    body += '                                                        <p class="x_x_topheader" style="margin: 0in; margin-bottom: .0001pt; text-align: center; line-height: 21.0pt;" align="center"><strong><span style="font-size: 21pt; font-family: Helvetica, sans-serif, serif, EmojiFont;" data-ogsc="rgb(51, 51, 51)">Reminder: "Event  Title: The Experience" webinar is tomorrow!</span></strong></p>';
     body += '                                                   </td>';
     body += '                                                   <td style="width: 8%; padding: 0in; height: 82px;" width="8%">&nbsp;</td>';
     body += '                                               </tr>';
@@ -934,7 +933,7 @@ function dayBefore() {
     body += '                                               <tr style="height: 36px;">';
     body += '                                                   <td style="width: 8%; padding: 0in; height: 36px;" width="8%">&nbsp;</td>';
     body += '                                                   <td style="width: 84%; padding: 0in; height: 36px;" valign="top" width="84%">';
-    body += '                                                       <p class="x_x_bodycopy" style="margin: 0in; margin-bottom: .0001pt; line-height: 13.0pt;"><span style="font-size: 8.8pt; font-family: Helvetica, sans-serif, serif, EmojiFont;" data-ogsc="rgb(77, 77, 77)">Just a reminder that our Microsoft Surface Hub 2S webinar begins <strong>tomorrow, September 17th at 12:00 PM CT</strong>. We are excited to have you join us!</span></p>';
+    body += '                                                       <p class="x_x_bodycopy" style="margin: 0in; margin-bottom: .0001pt; line-height: 13.0pt;"><span style="font-size: 8.8pt; font-family: Helvetica, sans-serif, serif, EmojiFont;" data-ogsc="rgb(77, 77, 77)">Just a reminder that our Microsoft Event  Title webinar begins <strong>tomorrow, September 17th at 12:00 PM CT</strong>. We are excited to have you join us!</span></p>';
     body += '                                                   </td>';
     body += '                                                   <td style="width: 8%; padding: 0in; height: 36px;" width="8%">&nbsp;</td>';
     body += '                                               </tr>';
@@ -974,7 +973,7 @@ function dayBefore() {
     body += '               <td style="padding: 0in 0in 0in 0in;" valign="top">';
     body += '                   <p class="x_x_infooter1" style="text-align: center;" align="center">&nbsp;</p>';
     body += '                   <p class="x_x_infooter1" style="text-align: center;" align="center">&nbsp;</p>';
-    body += '                   <p class="x_x_infooter1" style="text-align: center;" align="center"><span style="font-size: 8.5pt; font-family: Helvetica, sans-serif, serif, EmojiFont; color: #c3c3c3;" data-ogsc="rgb(153, 153, 153)"><a class="x_OWAAutoLink" style="color: #e49fff;" title="View Map" href="https://www.google.com/maps/place/2075+E+Governors+Cir,+Houston,+TX+77092/@29.806549,-95.448371" target="_blank" rel="noopener noreferrer" data-auth="NotApplicable" data-ogsc=""><span style="color: #3f3f3f; text-decoration: none;" data-ogsc="rgb(153, 153, 153)">UnifiedCommunications.com, 2075 East Governors Circle, Houston, TX 77092<br><br></span></a></span></p>';
+    body += '                   <p class="x_x_infooter1" style="text-align: center;" align="center"><span style="font-size: 8.5pt; font-family: Helvetica, sans-serif, serif, EmojiFont; color: #c3c3c3;" data-ogsc="rgb(153, 153, 153)"><a class="x_OWAAutoLink" style="color: #e49fff;" title="View Map" href="https://www.google.com/maps/place/address+@coordinates" target="_blank" rel="noopener noreferrer" data-auth="NotApplicable" data-ogsc=""><span style="color: #3f3f3f; text-decoration: none;" data-ogsc="rgb(153, 153, 153)">yoursite.com, 2075 East Governors Circle, Houston, TX 77092<br><br></span></a></span></p>';
     body += '               </td>';
     body += '           </tr>';
     body += '       </tbody>';
@@ -1007,7 +1006,7 @@ function afterWebinar(firstName) {
     body += '                                               <tr>';
     body += '                                                   <td style="width: 8.0%; padding: 0in 0in 0in 0in;" width="8%">&nbsp;</td>';
     body += '                                                   <td style="width: 84.0%; padding: 0in 0in 0in 0in;" valign="top" width="84%"><br />';
-    body += '                                                       <p class="x_x_topheader" style="margin: 0in; margin-bottom: .0001pt; text-align: center; line-height: 21.0pt;" align="center"><strong><span style="font-size: 20pt; font-family: Helvetica, sans-serif, serif, EmojiFont;" data-ogsc="rgb(51, 51, 51)">"Surface Hub 2S: The Experience" Webinar Recording &amp; Q&amp;A Transcript and Survey</span></strong></p>';
+    body += '                                                       <p class="x_x_topheader" style="margin: 0in; margin-bottom: .0001pt; text-align: center; line-height: 21.0pt;" align="center"><strong><span style="font-size: 20pt; font-family: Helvetica, sans-serif, serif, EmojiFont;" data-ogsc="rgb(51, 51, 51)">"Event  Title: The Experience" Webinar Recording &amp; Q&amp;A Transcript and Survey</span></strong></p>';
     body += '                                                   </td>';
     body += '                                                   <td style="width: 8.0%; padding: 0in 0in 0in 0in;" width="8%">&nbsp;</td>';
     body += '                                               </tr>';
@@ -1043,7 +1042,7 @@ function afterWebinar(firstName) {
     body += '                                                                   <tr style="height: 8px;">';
     body += '                                                                       <td style="width: 214px; background: white; padding: 0in; height: 40px; border: 2px solid #366ab3;" data-ogsb="rgb(89, 203, 89)">';
     body += '                                                                           <div align="center border: 10px solid blue">';
-    body += '                                                                               <p class="x_x_MsoNormal" align="center"><span style="color: #366ab3;"><a id="LPlnk646404" class="x_OWAAutoLink" style="color: #366ab3;" title="Join The Webinar" href="https://www.unifiedcommunications.com/pdf/Q&A_Surface-Hub-2S-Experience-Webinar(UnifiedCommunications.com).pdf" target="_blank" rel="noopener noreferrer" data-auth="NotApplicable" data-ogsc=""><span style="font-size: 10pt; border: 5px; font-family: Helvetica, sans-serif, serif, EmojiFont; color: #366ab3; text-transform: uppercase; letter-spacing: 1.5pt; text-decoration: none;">Q&amp;A Transcript</span></a></span></p>';
+    body += '                                                                               <p class="x_x_MsoNormal" align="center"><span style="color: #366ab3;"><a id="LPlnk646404" class="x_OWAAutoLink" style="color: #366ab3;" title="Join The Webinar" href="https://www.yoursite.com/pdf/Q&A_Surface-Hub-2S-Experience-Webinar(yoursite.com).pdf" target="_blank" rel="noopener noreferrer" data-auth="NotApplicable" data-ogsc=""><span style="font-size: 10pt; border: 5px; font-family: Helvetica, sans-serif, serif, EmojiFont; color: #366ab3; text-transform: uppercase; letter-spacing: 1.5pt; text-decoration: none;">Q&amp;A Transcript</span></a></span></p>';
     body += '                                                                           </div>';
     body += '                                                                       </td>';
     body += '                                                                   </tr>';
@@ -1060,9 +1059,9 @@ function afterWebinar(firstName) {
     body += '                                                           </tbody>';
     body += '                                                       </table>';
     body += '                                                       <br />';
-    body += '                                                       <p style="font-size: 10pt; font-family: Helvetica, sans-serif, serif, EmojiFont; text-align: left;">If you have any further questions about anything you saw in the webinar or anything else, give us a call at <span style="text-decoration-color: #366ab3; color: #366ab3;"><u><a href="tel:800-641-6416">800.641.6416</a></u></span> or email us at <a style="text-decoration-color: #366ab3;" href="mailto:info@unifiedcommunications.com"><span style="color: #366ab3;">info@unifiedcommunications.com</span></a>. Our experts are always happy to assist in bringing people, knowledge, and ideas together through technology.</p>';
+    body += '                                                       <p style="font-size: 10pt; font-family: Helvetica, sans-serif, serif, EmojiFont; text-align: left;">If you have any further questions about anything you saw in the webinar or anything else, give us a call at <span style="text-decoration-color: #366ab3; color: #366ab3;"><u><a href="tel:800-641-6416">800.641.6416</a></u></span> or email us at <a style="text-decoration-color: #366ab3;" href="mailto:info@yoursite.com"><span style="color: #366ab3;">info@yoursite.com</span></a>. Our experts are always happy to assist in bringing people, knowledge, and ideas together through technology.</p>';
     body += '                                                       <p style="font-size: 10pt; font-family: Helvetica, sans-serif, serif, EmojiFont; text-align: left;">Sincerely,</p>';
-    body += '                                                       <p style="font-size: 10pt; font-family: Helvetica, sans-serif, serif, EmojiFont; text-align: left;">The UnifiedCommunications.com Team</p>';
+    body += '                                                       <p style="font-size: 10pt; font-family: Helvetica, sans-serif, serif, EmojiFont; text-align: left;">The yoursite.com Team</p>';
     body += '                                                   </td>';
     body += '                                               </tr>';
     body += '                                               <tr>';
@@ -1089,7 +1088,7 @@ function afterWebinar(firstName) {
     body += '       <tbody>';
     body += '           <tr>';
     body += '               <td style="padding: 0in 0in 0in 0in;" valign="top"><br />';
-    body += '                   <p class="x_x_infooter1" style="text-align: center;" align="center"><span style="font-size: 8.5pt; font-family: Helvetica, sans-serif, serif, EmojiFont; color: #c3c3c3;" data-ogsc="rgb(153, 153, 153)"> <a id="LPlnk479088" class="x_OWAAutoLink" style="color: #e49fff;" title="View Map" href="https://www.google.com/maps/place/2075+E+Governors+Cir,+Houston,+TX+77092/@29.806549,-95.448371" target="_blank" rel="noopener noreferrer" data-auth="NotApplicable" data-ogsc=""> <span style="color: #3f3f3f; text-decoration: none;" data-ogsc="rgb(153, 153, 153)">UnifiedCommunications.com, 2075 East Governors Circle, Houston, TX 77092 </span> </a> </span></p>';
+    body += '                   <p class="x_x_infooter1" style="text-align: center;" align="center"><span style="font-size: 8.5pt; font-family: Helvetica, sans-serif, serif, EmojiFont; color: #c3c3c3;" data-ogsc="rgb(153, 153, 153)"> <a id="LPlnk479088" class="x_OWAAutoLink" style="color: #e49fff;" title="View Map" href="https://www.google.com/maps/place/address+@coordinates" target="_blank" rel="noopener noreferrer" data-auth="NotApplicable" data-ogsc=""> <span style="color: #3f3f3f; text-decoration: none;" data-ogsc="rgb(153, 153, 153)">yoursite.com, 2075 East Governors Circle, Houston, TX 77092 </span> </a> </span></p>';
     body += '               </td>';
     body += '           </tr>';
     body += '       </tbody>';
@@ -1098,7 +1097,7 @@ function afterWebinar(firstName) {
     body += '    <tbody>';
     body += '        <tr>';
     body += '            <td style="width: 120.75pt; padding: 15.0pt 0in 11.25pt 7.5pt;" width="161"><br />';
-    body += '                <p align="center" class="x_x_MsoNormal"><a class="x_OWAAutoLink" style="color: #424242;" title="Visit UnifiedCommunications.com" href="http://www.unifiedcommunications.com/" target="_blank" rel="noopener noreferrer" data-auth="NotApplicable" data-ogsc=""> <span style="text-decoration: none;"> <img align="middle" id="x_x__x0000_i1025" style="width: 3in; display: block; margin-left: auto; margin-right: auto;" src="https://www.unifiedcommunications.com/skins/Skin_1/img/logo.png" alt="UnifiedCommunications Logo" width="161" border="" data-imagetype="External" /></span></a><a id="LPlnk129286" class="x_OWAAutoLink" style="color: #424242;" title="Visit UnifiedCommunications.com" href="http://www.unifiedcommunications.com/" target="_blank" rel="noopener noreferrer" data-auth="NotApplicable" data-ogsc=""></a></p>';
+    body += '                <p align="center" class="x_x_MsoNormal"><a class="x_OWAAutoLink" style="color: #424242;" title="Visit yoursite.com" href="http://www.yoursite.com/" target="_blank" rel="noopener noreferrer" data-auth="NotApplicable" data-ogsc=""> <span style="text-decoration: none;"> <img align="middle" id="x_x__x0000_i1025" style="width: 3in; display: block; margin-left: auto; margin-right: auto;" src="https://www.yoursite.com/skins/Skin_1/img/logo.png" alt="Your Site Logo" width="161" border="" data-imagetype="External" /></span></a><a id="LPlnk129286" class="x_OWAAutoLink" style="color: #424242;" title="Visit yoursite.com" href="http://www.yoursite.com/" target="_blank" rel="noopener noreferrer" data-auth="NotApplicable" data-ogsc=""></a></p>';
     body += '            </td>';
     body += '        </tr>';
     body += '    </tbody>';
@@ -1112,12 +1111,12 @@ function disregardEmail(firstName) {
     var body = '';
     body += '<div>';
     body += '   <p>Hello ' + firstName + ',</p>';
-    body += '   <p>Please disregard any emails you may have received from us regarding our webinar &ldquo;Surface Hub 2S: The Experience&rdquo; as starting either tomorrow or today. Our system had a hiccup and got a little too excited about the webinar and prematurely sent your reminders! We apologize for any confusion this has caused.</p>';
+    body += '   <p>Please disregard any emails you may have received from us regarding our webinar &ldquo;Event  Title: The Experience&rdquo; as starting either tomorrow or today. Our system had a hiccup and got a little too excited about the webinar and prematurely sent your reminders! We apologize for any confusion this has caused.</p>';
     body += '   <p><strong>The webinar is still slated to begin Tuesday, September 17<sup>th</sup> at 12:00 PM Central.</strong></p>';
     body += '   <p>Thank you again for registering, and&nbsp;we look forward to having you join us Tuesday!</p>';
-    body += '   <p>If you have any questions in the meantime, feel free to email us at <u><a tabindex="-1" title="mailto:info@unifiedcommunications.com" href="mailto:info@unifiedcommunications.com" target="_blank" rel="noreferrer noopener">info@unifiedcommunications.com</a></u> or call us at 800-641-6416.</p>';
+    body += '   <p>If you have any questions in the meantime, feel free to email us at <u><a tabindex="-1" title="mailto:info@yoursite.com" href="mailto:info@yoursite.com" target="_blank" rel="noreferrer noopener">info@yoursite.com</a></u> or call us at 800-641-6416.</p>';
     body += '   <p>Sincerely,</p>';
-    body += '   <p>The UnifiedCommunications.com Team</p>';
+    body += '   <p>The Yoursite.com Team</p>';
     body += '</div>';
     return body;
 }
