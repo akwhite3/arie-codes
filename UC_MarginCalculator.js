@@ -1,7 +1,13 @@
-/************************************************************* */
+/************************************************************* 
 // Margin Calculator 
 // By: Arie White
 // Suitlet & Client scripts 
+
+This script is used to calculate margins for various items and pricing levels 
+
+- used as a tool for sales executives and is also utilized as a popup window, available from the order entry screen. 
+- The user is able to price items and directly add the item at the specified pricing by button click
+
 /************************************************************* */
 
 function userRequest(request, response) {
