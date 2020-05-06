@@ -1,6 +1,10 @@
 /*******************
  * 
  * *Tags Client Script*
+ 
+  Used to support Tag custom record
+  Allows the user to add tags to a customer/contact record 
+  Appropriately displays the tags, which are clickable and bring the user to a list of applicable records 
  *
  ******************/
 
